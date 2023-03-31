@@ -33,6 +33,7 @@ export default function Timer() {
     setMinutes(0)
     setSeconds(0)
     setHour(0) 
+    setTimerState(false)
   }
 
   const startTimer = () => {
