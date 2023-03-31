@@ -1,11 +1,12 @@
-import React from "react";
-
+import React from 'react';
 import Timer from './components/Timer';
 
 function App() {
-   return (
-    <Timer/> 
-    )
+  return (
+    <div>
+      <Timer/>
+    </div>
+  );
 }
 
 export default App;
