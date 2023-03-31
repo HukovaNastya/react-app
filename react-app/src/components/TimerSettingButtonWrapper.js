@@ -1,8 +1,7 @@
-import React from 'react';
 import styled from 'styled-components';
 
 export const TimerSettingButtonWrapper = styled.div`
-  width: 500x;
+  width: 500px;
   position: absolute;
   top: 650px;
   display: flex;

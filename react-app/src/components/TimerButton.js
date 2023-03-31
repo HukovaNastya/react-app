@@ -1,8 +1,7 @@
-import React from 'react';
 import styled from 'styled-components';
 
 export const TimerButton = styled.a`
-  border-radius: 26.5px: 
+  border-radius: 26.5px;
   font-family: 'Poppins', sans-serif;
   font-style: normal;
   font-weight: 700;

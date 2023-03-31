@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 export const TimerSettingButton = styled.div`
@@ -12,7 +11,7 @@ export const TimerSettingButton = styled.div`
   background: #F87070;
   border-radius: 26.5px;
   text-align: center;
-  cursor:pointer;
+  cursor: pointer;
   margin-left: 20px;
   &:hover{
     opacity: 30%;
