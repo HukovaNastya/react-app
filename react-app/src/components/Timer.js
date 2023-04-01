@@ -8,13 +8,41 @@ import {TimerInnerCircle} from './TimerInnerCircle';
 import {TimerContent} from './TimerContent';
 import {TimerSettingButton} from './TimerSettingButton';
 import {TimerSettingButtonWrapper} from './TimerSettingButtonWrapper';
+import '../components/Timer.css';
 
 export default function Timer() {
-  const [hour, setHour] = useState(0);
-  const [minutes, setMinutes] = useState(0);
+  let [hour, setHour] = useState(0);
+  let [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [timerActive, setTimerState] = useState(false);
   const renderState = useRef(null);
+  let [date, setDate] = useState(new Date())
+
+  let options = 
+  { 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  };
+
+  function addTime(date, minutes, hour) {
+    const dateCopy = new Date(date);
+    if(minutes !== 0){
+      dateCopy.setMinutes(date.getMinutes() + minutes);
+      return dateCopy;
+    } else {
+      date.setHours(date.getHours() + hour);
+      return date;
+    }
+
+  }
+
+  function addHours(date, hours) {
+    date.setHours(date.getHours() + hours);
+    return date;
+  }
 
   const setTime = (hours = 0, minutes = 0, seconds = 0) => {
     setHour(hours)
@@ -27,6 +55,7 @@ export default function Timer() {
     setSeconds(0)
     setHour(0) 
     setTimerState(false)
+    setDate(new Date())
   }
 
   const startTimer = () => {
@@ -34,13 +63,18 @@ export default function Timer() {
       setTimerState(false);
     }else {
       setTimerState(true);
+      if(minutes !== 0){
+        setDate(addTime(date, minutes, hour=0))
+      }
+      else{
+        setDate(addTime(date, minutes=0, hour))
+      }
     }
-    
-
   }
 
   const stopTimer = () => {
     setTimerState(false)
+    setDate(new Date())
   }
 
   useEffect(() => {
@@ -79,12 +113,17 @@ export default function Timer() {
   return (
     <TimerContainer>
       <TimerTitle>React timer</TimerTitle>
+      <div className="timerInfo">
+        After press start will be:  {date.toLocaleString('en-US',options)}
+      </div>
       <TimerButtonBox>
         <TimerButton onClick={() => {setTime(0, 5, 0)}}>5 minutes</TimerButton>
         <TimerButton onClick={() => {setTime(0, 15, 0)}}>15 minutes</TimerButton>
         <TimerButton onClick={() => {setTime(0, 30, 0)}}>30 minutes</TimerButton>
         <TimerButton onClick={() => {setTime(1, 0, 0)}}>1 hour</TimerButton>
         <TimerButton onClick={() => {setTime(2, 0, 0)}}>2 hour</TimerButton>
+        <TimerButton onClick={() => {setTime(4, 0, 0)}}>4 hour</TimerButton>
+        <TimerButton onClick={() => {setTime(6, 0, 0)}}>6 hour</TimerButton>
       </TimerButtonBox>
       <TimerBox>
         <TimerInnerCircle>
