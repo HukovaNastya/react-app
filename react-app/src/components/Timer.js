@@ -30,7 +30,13 @@ export default function Timer() {
   }
 
   const startTimer = () => {
-    setTimerState(true);
+    if(hour === 0 && minutes === 0 && seconds === 0){
+      setTimerState(false);
+    }else {
+      setTimerState(true);
+    }
+    
+
   }
 
   const stopTimer = () => {
