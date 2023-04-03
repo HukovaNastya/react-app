@@ -17,6 +17,7 @@ export default function Timer() {
   const [timerActive, setTimerState] = useState(false);
   const renderState = useRef(null);
   let [date, setDate] = useState(new Date())
+  const useMemoDate = useMemo(() => date, [date])
 
   let options = { 
     year: 'numeric', 
@@ -27,7 +28,7 @@ export default function Timer() {
   };
 
   function addTime(date, minutes, hour) {
-    const dateCopy = new Date(date);
+    const dateCopy = new Date(useMemoDate);
     if(minutes !== 0){
       dateCopy.setMinutes(date.getMinutes() + minutes);
       return dateCopy;
@@ -49,7 +50,7 @@ export default function Timer() {
     setSeconds(0)
     setHour(0) 
     setTimerState(false)
-    setDate(new Date())
+    setDate(useMemoDate)
   }
 
   const startTimer = () => {
@@ -65,7 +66,7 @@ export default function Timer() {
       }
     }
   }
-  
+
   const stopTimer = () => {
     setTimerState(false)
     setDate(new Date())
@@ -107,8 +108,8 @@ export default function Timer() {
   return (
     <TimerContainer>
       <TimerTitle>React timer</TimerTitle>
-      <div className="timerInfo">
-        After press start will be:  {date.toLocaleString('en-US',options)}
+       <div className="timerInfo">
+        After press start will be:  {useMemoDate.toLocaleString('en-US',options)}
       </div>
       <TimerButtonBox>
         <TimerButton onClick={() => {setTime(0, 5, 0)}}>5 minutes</TimerButton>
