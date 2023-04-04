@@ -9,5 +9,5 @@ export const TimerTitle = styled.h1`
   text-align: center;
   color: #D7E0FF;
   padding-top: 48px;
-  margin-bottom: 55px;
+  margin-bottom: 20px;
 `

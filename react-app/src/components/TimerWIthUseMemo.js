@@ -6,43 +6,33 @@ import {TimerBox} from './TimerBox';
 import {TimerContent} from './TimerContent';
 import {TimerSettingButton} from './TimerSettingButton';
 import {TimerSettingButtonWrapper} from './TimerSettingButtonWrapper';
-import './Timer.css';
-
-const options = {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-  hour: '2-digit',
-  minute: '2-digit',
-};
+import '../components/Timer.css';
 
 export default function Timer() {
-  const [hour, setHour] = useState(0);
-  const [minutes, setMinutes] = useState(0);
+  let [hour, setHour] = useState(0);
+  let [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [timerActive, setTimerState] = useState(false);
   const renderState = useRef(null);
-  // const [date, setDate] = useState(null)
+  let useMemoDate = useMemo(() => new Date(), [hour, minutes, seconds])
 
-  const timerEndDate = useMemo(() => {
-    if (hour === 0 && minutes === 0 && seconds === 0) return '-'
+  let options = { 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  };
 
-    const dateCopy = new Date();
-    dateCopy.setSeconds(dateCopy.getSeconds() + seconds);
-    dateCopy.setMinutes(dateCopy.getMinutes() + minutes);
-    dateCopy.setHours(dateCopy.getHours() + hour);
-
-    return dateCopy.toLocaleString('eu-UA', options)
-  }, [minutes, hour, seconds])
-
-  // function timerEndDate(minutes, hour, seconds) {
-  //   const dateCopy = new Date();
-  //   dateCopy.setSeconds(dateCopy.getSeconds() + seconds);
-  //   dateCopy.setMinutes(dateCopy.getMinutes() + minutes);
-  //   dateCopy.setHours(dateCopy.getHours() + hour);
-  //
-  //   return dateCopy.toLocaleString('eu-UA', options)
-  // }
+  function addTime(date, minutes, hour) {
+    if(minutes !== 0){
+      useMemoDate.setMinutes(date.getMinutes() + minutes);
+      return useMemoDate;
+    } else {
+      useMemoDate.setHours(date.getHours() + hour);
+      return useMemoDate;
+    }
+  }
 
   const setTime = (hours = 0, minutes = 0, seconds = 0) => {
     setTimerState(false);
@@ -56,29 +46,36 @@ export default function Timer() {
     setSeconds(0)
     setHour(0) 
     setTimerState(false)
-    // setDate(null)
   }
 
   const startTimer = () => {
-    if (hour === 0 && minutes === 0 && seconds === 0) return
-
-    setTimerState(true)
-    // setDate(timerEndDate(minutes, hour, seconds))
+    if(hour === 0 && minutes === 0 && seconds === 0){
+      setTimerState(false);
+    }else {
+      setTimerState(true);
+      if(minutes !== 0){
+        addTime(useMemoDate, minutes, hour=0)
+      }
+      else{
+        addTime(useMemoDate, minutes=0, hour)
+      }
+    }
   }
-  
+
   const stopTimer = () => {
     setTimerState(false)
-    // setDate(null)
+    useMemoDate = new Date();
+    return useMemoDate;
   }
 
   useEffect(() => {
     if(timerActive) {
       renderState.current = setInterval(() => {
-        if (seconds > 0) {
+        if(seconds > 0) {
           setSeconds(seconds - 1);
         }
-        if (seconds === 0) {
-          if (minutes === 0) {
+        if(seconds === 0) {
+          if(minutes === 0) {
             if (hour === 0) {
               clearInterval(renderState.current)
               renderState.current = null
@@ -106,10 +103,10 @@ export default function Timer() {
 
   return (
     <div className="timer-container">
-     <TimerTitle>React timer</TimerTitle>
-       <TimerTitle>
-         { timerEndDate }
-       </TimerTitle>
+      <TimerTitle>React timer</TimerTitle>
+        <TimerTitle>
+          {useMemoDate.toLocaleString('en-US',options)}
+      </TimerTitle>
       <TimerButtonBox>
         <TimerButton onClick={() => {setTime(0, 5, 0)}}>5 minutes</TimerButton>
         <TimerButton onClick={() => {setTime(0, 15, 0)}}>15 minutes</TimerButton>
@@ -118,18 +115,18 @@ export default function Timer() {
         <TimerButton onClick={() => {setTime(2, 0, 0)}}>2 hour</TimerButton>
         <TimerButton onClick={() => {setTime(4, 0, 0)}}>4 hour</TimerButton>
         <TimerButton onClick={() => {setTime(6, 0, 0)}}>6 hour</TimerButton>
-      </TimerButtonBox>
-      <TimerBox>
-        <TimerContent>
-          {formatTime(hour)}:{formatTime(minutes)}:{formatTime(seconds)}
-        </TimerContent>
-      </TimerBox>
-      <TimerSettingButtonWrapper>
-        <TimerSettingButton onClick={startTimer}> Start</TimerSettingButton>
-        <TimerSettingButton onClick={stopTimer}>Stop</TimerSettingButton>
-        <TimerSettingButton onClick={resetTimer}> Clear</TimerSettingButton>
-      </TimerSettingButtonWrapper>
-    </div>
+     </TimerButtonBox>
+     <TimerBox>
+       <TimerContent>
+         {formatTime(hour)}:{formatTime(minutes)}:{formatTime(seconds)}
+       </TimerContent>
+     </TimerBox>
+     <TimerSettingButtonWrapper>
+       <TimerSettingButton onClick={startTimer}> Start</TimerSettingButton>
+       <TimerSettingButton onClick={stopTimer}>Stop</TimerSettingButton>
+       <TimerSettingButton onClick={resetTimer}> Clear</TimerSettingButton>
+     </TimerSettingButtonWrapper>
+   </div>
   );
 }
 

@@ -2,15 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a11418d6-99a4-4202-a239-16f415be7580" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ProgressBar.js" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Timer.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/TimerWIthUseMemo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Timer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Timer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/TimerBox.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TimerBox.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/TimerButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TimerButton.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/TimerButtonBox.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TimerButtonBox.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/TimerContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TimerContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/TimerContainer.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/TimerContent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TimerContent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/TimerInnerCircle.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TimerInnerCircle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/TimerInnerCircle.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/TimerSettingButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TimerSettingButton.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/TimerSettingButtonWrapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TimerSettingButtonWrapper.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/TimerTitle.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TimerTitle.js" afterDir="false" />
@@ -32,18 +33,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/katedzuhan/Documents/mentoring/react-app/react-app",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/katedzuhan/Documents/mentoring/react-app/react-app&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
