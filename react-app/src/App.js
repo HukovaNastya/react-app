@@ -5,8 +5,8 @@ import TimerWIthUseMemo from './components/Timer';
 function App() {
   return (
     <div>
-      <Timer/>
-      {/* <TimerWIthUseMemo/> */}
+      {/* <Timer/> */}
+      <TimerWIthUseMemo/>
     </div>
   );
 }

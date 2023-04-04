@@ -12,7 +12,6 @@ export const TimerSettingButton = styled.div`
   border-radius: 26.5px;
   text-align: center;
   cursor: pointer;
-  margin-left: 20px;
   &:hover{
     opacity: 30%;
     color: #fff;

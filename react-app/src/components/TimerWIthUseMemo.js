@@ -2,9 +2,7 @@ import React, {useState, useEffect, useRef, useMemo} from "react";
 import {TimerButton} from "./TimerButton";
 import {TimerTitle} from './TimerTitle';
 import {TimerButtonBox} from './TimerButtonBox';
-import {TimerContainer} from './TimerContainer';
 import {TimerBox} from './TimerBox';
-import {TimerInnerCircle} from './TimerInnerCircle';
 import {TimerContent} from './TimerContent';
 import {TimerSettingButton} from './TimerSettingButton';
 import {TimerSettingButtonWrapper} from './TimerSettingButtonWrapper';
@@ -16,8 +14,7 @@ export default function Timer() {
   const [seconds, setSeconds] = useState(0);
   const [timerActive, setTimerState] = useState(false);
   const renderState = useRef(null);
-  let [date, setDate] = useState(new Date())
-  const useMemoDate = useMemo(() => date, [date])
+  let useMemoDate = useMemo(() => new Date(), [hour, minutes, seconds])
 
   let options = { 
     year: 'numeric', 
@@ -28,18 +25,17 @@ export default function Timer() {
   };
 
   function addTime(date, minutes, hour) {
-    const dateCopy = new Date(useMemoDate);
     if(minutes !== 0){
-      dateCopy.setMinutes(date.getMinutes() + minutes);
-      return dateCopy;
+      useMemoDate.setMinutes(date.getMinutes() + minutes);
+      return useMemoDate;
     } else {
-      date.setHours(date.getHours() + hour);
-      return date;
+      useMemoDate.setHours(date.getHours() + hour);
+      return useMemoDate;
     }
-
   }
 
   const setTime = (hours = 0, minutes = 0, seconds = 0) => {
+    setTimerState(false);
     setHour(hours)
     setMinutes(minutes)
     setSeconds(seconds)
@@ -50,7 +46,6 @@ export default function Timer() {
     setSeconds(0)
     setHour(0) 
     setTimerState(false)
-    setDate(useMemoDate)
   }
 
   const startTimer = () => {
@@ -59,17 +54,18 @@ export default function Timer() {
     }else {
       setTimerState(true);
       if(minutes !== 0){
-        setDate(addTime(date, minutes, hour=0))
+        addTime(useMemoDate, minutes, hour=0)
       }
       else{
-        setDate(addTime(date, minutes=0, hour))
+        addTime(useMemoDate, minutes=0, hour)
       }
     }
   }
 
   const stopTimer = () => {
     setTimerState(false)
-    setDate(new Date())
+    useMemoDate = new Date();
+    return useMemoDate;
   }
 
   useEffect(() => {
@@ -106,11 +102,11 @@ export default function Timer() {
   }
 
   return (
-    <TimerContainer>
+    <div className="timer-container">
       <TimerTitle>React timer</TimerTitle>
-       <div className="timerInfo">
-        After press start will be:  {useMemoDate.toLocaleString('en-US',options)}
-      </div>
+        <TimerTitle>
+          {useMemoDate.toLocaleString('en-US',options)}
+      </TimerTitle>
       <TimerButtonBox>
         <TimerButton onClick={() => {setTime(0, 5, 0)}}>5 minutes</TimerButton>
         <TimerButton onClick={() => {setTime(0, 15, 0)}}>15 minutes</TimerButton>
@@ -119,20 +115,18 @@ export default function Timer() {
         <TimerButton onClick={() => {setTime(2, 0, 0)}}>2 hour</TimerButton>
         <TimerButton onClick={() => {setTime(4, 0, 0)}}>4 hour</TimerButton>
         <TimerButton onClick={() => {setTime(6, 0, 0)}}>6 hour</TimerButton>
-      </TimerButtonBox>
-      <TimerBox>
-        <TimerInnerCircle>
-        <TimerContent>
-          {formatTime(hour)}:{formatTime(minutes)}:{formatTime(seconds)}
-        </TimerContent>
-      </TimerInnerCircle>
-      </TimerBox>
-      <TimerSettingButtonWrapper>
-        <TimerSettingButton onClick={startTimer}> Start</TimerSettingButton>
-        <TimerSettingButton onClick={stopTimer}>Stop</TimerSettingButton>
-        <TimerSettingButton onClick={resetTimer}> Clear</TimerSettingButton>
-      </TimerSettingButtonWrapper>
-    </TimerContainer>
+     </TimerButtonBox>
+     <TimerBox>
+       <TimerContent>
+         {formatTime(hour)}:{formatTime(minutes)}:{formatTime(seconds)}
+       </TimerContent>
+     </TimerBox>
+     <TimerSettingButtonWrapper>
+       <TimerSettingButton onClick={startTimer}> Start</TimerSettingButton>
+       <TimerSettingButton onClick={stopTimer}>Stop</TimerSettingButton>
+       <TimerSettingButton onClick={resetTimer}> Clear</TimerSettingButton>
+     </TimerSettingButtonWrapper>
+   </div>
   );
 }
 

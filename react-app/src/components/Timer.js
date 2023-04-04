@@ -2,13 +2,11 @@ import React, {useState, useEffect, useRef, useMemo} from "react";
 import {TimerButton} from "./TimerButton";
 import {TimerTitle} from './TimerTitle';
 import {TimerButtonBox} from './TimerButtonBox';
-import {TimerContainer} from './TimerContainer';
 import {TimerBox} from './TimerBox';
-import {TimerInnerCircle} from './TimerInnerCircle';
 import {TimerContent} from './TimerContent';
 import {TimerSettingButton} from './TimerSettingButton';
 import {TimerSettingButtonWrapper} from './TimerSettingButtonWrapper';
-import '../components/Timer.css';
+import './Timer.css';
 
 export default function Timer() {
   let [hour, setHour] = useState(0);
@@ -35,10 +33,10 @@ export default function Timer() {
       date.setHours(date.getHours() + hour);
       return date;
     }
-
   }
 
   const setTime = (hours = 0, minutes = 0, seconds = 0) => {
+    setTimerState(false);
     setHour(hours)
     setMinutes(minutes)
     setSeconds(seconds)
@@ -105,11 +103,11 @@ export default function Timer() {
   }
 
   return (
-    <TimerContainer>
-      <TimerTitle>React timer</TimerTitle>
-      <div className="timerInfo">
-        After press start will be:  {date.toLocaleString('en-US',options)}
-      </div>
+    <div className="timer-container">
+     <TimerTitle>React timer</TimerTitle>
+       <TimerTitle>
+         {date.toLocaleString('en-US',options)}
+       </TimerTitle>
       <TimerButtonBox>
         <TimerButton onClick={() => {setTime(0, 5, 0)}}>5 minutes</TimerButton>
         <TimerButton onClick={() => {setTime(0, 15, 0)}}>15 minutes</TimerButton>
@@ -120,18 +118,16 @@ export default function Timer() {
         <TimerButton onClick={() => {setTime(6, 0, 0)}}>6 hour</TimerButton>
       </TimerButtonBox>
       <TimerBox>
-        <TimerInnerCircle>
         <TimerContent>
           {formatTime(hour)}:{formatTime(minutes)}:{formatTime(seconds)}
         </TimerContent>
-      </TimerInnerCircle>
       </TimerBox>
       <TimerSettingButtonWrapper>
         <TimerSettingButton onClick={startTimer}> Start</TimerSettingButton>
         <TimerSettingButton onClick={stopTimer}>Stop</TimerSettingButton>
         <TimerSettingButton onClick={resetTimer}> Clear</TimerSettingButton>
       </TimerSettingButtonWrapper>
-    </TimerContainer>
+    </div>
   );
 }
 
